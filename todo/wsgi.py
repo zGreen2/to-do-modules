@@ -1,11 +1,9 @@
-"""
-WSGI config for todo project.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
 
-For more information on this file, see
-https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
-"""
+application = Cling(get_wsgi_application())
+
 
 import os
 
