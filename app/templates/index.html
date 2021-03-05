@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="modal pt-5" id="taskModal" style="opacity:0.97;">
+  <div class="container pt-4">
+    <div class="row p-0 mt-4">
+      <div class="col-lg-4 mx-auto shadow bg-light p-0">
+        <div class="alert alert-info " >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          <h2>Add new Task</h2>
+        </div>
+        <div class="p-4">
+          <form action="/add-task/" method="POST">
+            {% csrf_token %} {{ form.as_p }}
+            <hr>
+            <input class="btn btn-info" type="submit" value="Add Task" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-5">
+<div class="col mb-4">
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#taskModal">
+  ADD TASK
+</button>
+  <p class="card p-1 mr-1" style="float: right;">Task to be done: {{tasks|length}}</p>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-3">
+
+  {% for task in tasks %}
+  <div class="col mb-4">
+    <div class="card">
+      <img class="card-img-top" src="{% static 'app/images/test.jpg' %}" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{task.title}}</h5>
+        <p class="card-text">Page: {{task.page}}</p>
+        <p class="card-text">Subject: {{task.subject}}</p>
+        <p class="card-text">Week: {{task.week}}</p>
+        <a href="done-task/{{task.id}}" class="btn btn-success">Done</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+{% endblock %}
